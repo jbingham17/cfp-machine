@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CFP Machine
+
+A college football playoff prediction web application that allows users to predict game outcomes and see how they affect conference championships and playoff scenarios.
+
+## Features
+
+- 🏈 Browse all FBS college football teams
+- 🏆 View conference standings and rankings
+- 🎮 Interactive game predictor
+- 📊 Calculate playoff scenarios based on predictions
+- 🔄 Real-time updates with actual game results
+- 💾 Save and share prediction scenarios
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, TypeScript, React
+- **UI**: Tailwind CSS, shadcn/ui
+- **Database**: Convex (real-time, serverless)
+- **State Management**: Zustand
+- **API**: College Football Data API
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ installed
+- npm or yarn package manager
+- College Football Data API key (get one at [collegefootballdata.com](https://collegefootballdata.com))
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/cfp-machine.git
+cd cfp-machine
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edit `.env.local` and add your API key:
+```
+CFB_API_KEY=your-api-key-here
+```
 
-## Learn More
+4. Set up Convex:
+```bash
+npx convex dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+This will prompt you to create a new Convex project or link to an existing one.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Run the development server:
+```bash
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+cfp-machine/
+├── app/                # Next.js app router pages
+│   ├── teams/         # Team pages
+│   ├── conferences/   # Conference pages
+│   └── predictor/     # Playoff predictor
+├── components/        # React components
+│   ├── ui/           # shadcn/ui components
+│   ├── teams/        # Team components
+│   ├── conferences/  # Conference components
+│   └── games/        # Game components
+├── convex/           # Backend database
+│   ├── schema.ts     # Database schema
+│   └── sync.ts       # API sync functions
+├── lib/              # Utilities
+│   └── cfb-api.ts    # API client
+└── store/            # State management
+    └── predictions.ts # Prediction store
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Data Synchronization
+
+To populate the database with current season data:
+
+1. Make sure Convex is running (`npx convex dev`)
+2. Run the sync function from the Convex dashboard or programmatically
+3. Data will be fetched from the College Football Data API and stored in Convex
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Push your code to GitHub
+
+2. Import your repository in [Vercel](https://vercel.com)
+
+3. Configure environment variables:
+   - `CFB_API_KEY`: Your College Football Data API key
+   - `NEXT_PUBLIC_CONVEX_URL`: Your Convex deployment URL
+
+4. Deploy!
+
+## Development Roadmap
+
+- [x] Project setup and configuration
+- [x] Database schema design
+- [x] Core UI components
+- [x] Basic pages (teams, conferences)
+- [x] Game prediction interface
+- [ ] API data synchronization
+- [ ] Conference championship logic
+- [ ] Complex tiebreaker rules
+- [ ] Playoff bracket visualization
+- [ ] User accounts and saved scenarios
+- [ ] Share predictions feature
+- [ ] Historical data analysis
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT License
+
+## Acknowledgments
+
+- Data provided by [College Football Data API](https://collegefootballdata.com)
+- UI components from [shadcn/ui](https://ui.shadcn.com)
+- Built with [Next.js](https://nextjs.org) and [Convex](https://convex.dev)
